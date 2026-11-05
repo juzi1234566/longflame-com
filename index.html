@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LongFlame — Chinese craft, one kiln at a time</title>
+<meta name="description" content="LongFlame tells the stories behind Chinese crafts, carefully and with sources. Our first story: Ru ware, the pale blue-green porcelain of the Northern Song.">
+<meta name="theme-color" content="#D5DFDA">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="hero">
+  <!-- 头图：首页长卷（样图 B，生图模型出的山水画，不是地图、不是真迹），由 工具/build_overseas_assets.py 裁出。手机用竖幅 -->
+  <picture>
+    <source media="(max-width: 700px)" srcset="assets/img/hero-mobile.webp" width="900" height="1536">
+    <img class="hero-img ink-in" src="assets/img/hero.webp" alt="" width="2880" height="1500" decoding="async" fetchpriority="high">
+  </picture>
+  <div class="mist mist--a" aria-hidden="true"></div>
+  <div class="mist mist--b" aria-hidden="true"></div>
+  <header class="bar bar--over">
+    <a class="brand" href="index.html">LongFlame</a>
+    <nav aria-label="Main">
+      <a href="#stories">Stories</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <div class="hero-text rise">
+    <h1>Chinese craft, one kiln at a time.</h1>
+    <p>Stories of Chinese crafts and the history behind them, told carefully and with sources. We begin with Ru ware, from Henan.</p>
+  </div>
+</div>
+
+<main id="main">
+  <section class="section" id="stories" aria-labelledby="stories-title">
+    <h2 class="label" id="stories-title">The first story</h2>
+    <a class="card" href="stories/ru-ware.html">
+      <div class="card-img">
+        <img src="assets/stories/ru-head-small.webp" alt="" width="1200" height="750" loading="lazy" decoding="async">
+      </div>
+      <div class="card-text">
+        <p class="card-meta"><span class="seal" aria-hidden="true">汝</span><span>Story No. 1 · Henan</span></p>
+        <h3>Ru ware</h3>
+        <p class="card-hook">The blue-green an emperor asked for, and why it was lost.</p>
+        <span class="card-more">Read the story</span>
+      </div>
+    </a>
+    <p class="card-note">More stories will follow.</p>
+  </section>
+
+  <section class="section" id="subscribe" aria-labelledby="sub-title">
+    <div class="subscribe">
+      <h2 id="sub-title">Get the next story by email</h2>
+      <p>We write when a new story is ready.</p>
+      <!-- 表单故意不写 action，输入框故意不写 name：没有配置 Kit 地址时，提交带不走任何数据。见 assets/subscribe.js -->
+      <form class="sub-form" data-subscribe>
+        <label class="sub-label" for="sub-email">Email address</label>
+        <div class="sub-row">
+          <input id="sub-email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com" aria-describedby="sub-note">
+          <button type="submit">Subscribe</button>
+        </div>
+        <p class="sub-note" id="sub-note">We’ll send you a confirmation email first; you’re only subscribed once you click the link in it. Every email has a one-click unsubscribe link. <a href="privacy.html">Privacy policy</a></p>
+        <p class="sub-status" data-subscribe-status role="status" aria-live="polite"></p>
+        <noscript><p class="noscript">Subscribing needs JavaScript.</p></noscript>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Illustrations are AI-assisted.</p>
+  <a href="privacy.html">Privacy</a>
+  <span>© LongFlame</span>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/subscribe.js"></script>
+<!-- Cloudflare Web Analytics：上线时在这里放官方片段（不设 Cookie）。现在不加载任何统计脚本，加之前先问用户 -->
+</body>
+</html>
