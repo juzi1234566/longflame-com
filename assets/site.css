@@ -440,6 +440,7 @@ input::placeholder { color: var(--ink-3); opacity: 1; }
 .foot-brand span { font-family: var(--serif); font-size: 22px; line-height: 1; }
 .foot-col { grid-column: span 3; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
 .foot-col .label { margin-bottom: 8px; }
+.foot-col .foot-follow { margin-top: 24px; }
 .foot-col--nav { grid-column: 4 / span 3; }
 .foot-nl { grid-column: 10 / span 3; }
 .foot-nl-row { display: flex; align-items: center; gap: 16px; height: 40px; border-bottom: 1px solid var(--ink); }
