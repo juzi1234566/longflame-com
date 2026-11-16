@@ -9,12 +9,12 @@
   var input = document.getElementById('q');
   var out = document.querySelector('[data-results]');
   var status = document.querySelector('[data-search-status]');
-  if (!input || !out) return;
+  if (!input || !out || !status) return;
 
-  var GROUPS = ['Inheritors', 'Stories', 'Works'];
+  var GROUPS = ['Episodes', 'Inheritors'];
 
   function norm(s) {
-    return String(s || '').toLowerCase().replace(/[\[\]“”"'’()·,.]/g, ' ').replace(/\s+/g, ' ').trim();
+    return String(s || '').toLowerCase().replace(/[“”"'’()·,.]/g, ' ').replace(/\s+/g, ' ').trim();
   }
 
   function el(tag, cls, text) {
@@ -27,44 +27,38 @@
   function render(q) {
     out.textContent = '';
     var terms = norm(q).split(' ').filter(Boolean);
-    if (!terms.length) {
-      status.textContent = '';
-      return;
-    }
+    if (!terms.length) { status.textContent = ''; return; }
     var hits = index.filter(function (item) {
       var hay = norm(item.text + ' ' + item.title + ' ' + item.sub + ' ' + item.no);
       return terms.every(function (t) { return hay.indexOf(t) !== -1; });
     });
-    status.textContent = hits.length === 1 ? '1 result' : hits.length + ' results';
     if (!hits.length) {
       status.textContent = 'No results. Try a craft, a place or a number such as 001.';
       return;
     }
+    status.textContent = '';
     GROUPS.forEach(function (g) {
       var group = hits.filter(function (h) { return h.t === g; });
       if (!group.length) return;
-      var sec = el('section', 'results-group');
-      var head = el('div', 'sec-head');
-      var title = el('div', 'sec-title');
-      title.appendChild(el('h2', 'h2', g));
-      title.appendChild(el('span', 'label label--3', String(group.length)));
-      head.appendChild(title);
-      sec.appendChild(head);
+      var h2 = el('h2', '', g);
+      h2.appendChild(el('small', '', group.length === 1 ? '1 result' : group.length + ' results'));
+      out.appendChild(h2);
       group.forEach(function (h) {
-        var a = el('a', 'hit');
+        var a = el('a', 'rrow');
         a.href = h.url;
-        a.appendChild(el('span', 'hit-no', h.no));
-        a.appendChild(el('span', 'hit-title', h.title));
-        a.appendChild(el('span', 'hit-sub', h.sub));
-        sec.appendChild(a);
+        a.appendChild(el('span', 'num', h.no));
+        a.appendChild(el('span', 't', h.title));
+        a.appendChild(el('span', 'm', h.sub));
+        out.appendChild(a);
       });
-      out.appendChild(sec);
     });
   }
 
-  var params = new URLSearchParams(window.location.search);
-  var initial = params.get('q') || '';
-  input.value = initial;
-  render(initial);
+  var m = /[?&]q=([^&]*)/.exec(window.location.search);
+  if (m) {
+    try { input.value = decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (e) { /* 坏参数忽略 */ }
+  }
   input.addEventListener('input', function () { render(input.value); });
+  if (input.form) input.form.addEventListener('submit', function (e) { e.preventDefault(); render(input.value); });
+  render(input.value);
 })();
